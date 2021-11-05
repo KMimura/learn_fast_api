@@ -10,4 +10,9 @@ class api_test(unittest.TestCase):
         response = requests.post(request_url,json=request_body)
         print(response.json())
 
+    def test_get(self):
+        request_url = BASE_URL + 'items/0'
+        response = requests.get(request_url)
+        print(response.json())
+
 unittest.main()
