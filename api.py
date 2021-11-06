@@ -14,7 +14,7 @@ class ItemManager():
         self.items = []
 
     def add(self, item: Item):
-        if len(self.item) > 0:
+        if len(self.items) > 0:
             items_sorted_by_id = self.items.sort(key=lambda x: x.id, reverse=True)
             biggest_id = items_sorted_by_id[len(items_sorted_by_id)-1]
             item.id = biggest_id + 1
@@ -27,7 +27,10 @@ class ItemManager():
 
     def retrieve(self, item_id: int) -> Item:
         if item_id is not None:
-            item_retrieved = [i for i in self.items if i['id'] == item_id ][0]
+            try:
+                item_retrieved = [i for i in self.items if i['id'] == item_id ][0]
+            except IndexError:
+                item_retrieved = []
         else:
             item_retrieved = self.items
         return item_retrieved
