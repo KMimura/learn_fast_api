@@ -23,14 +23,22 @@ class ItemManager():
         self.items.append(item)
 
     def delete(self, item_id: int, item: Item):
-        self.items = [i if i['id'] != item_id else item for i in self.items]
+        delete_position = None
+        for i, item in enumerate(self.items):
+            if item['id'] == item_id:
+                delete_position = i
+                break
+        if delete_position is not None:
+            self.items = self.items.pop(delete_position)
+        # self.items = [i if i['id'] != item_id else item for i in self.items]
 
     def retrieve(self, item_id: int) -> Item:
         if item_id is not None:
-            try:
-                item_retrieved = [i for i in self.items if i['id'] == item_id ][0]
-            except IndexError:
-                item_retrieved = []
+            item_retrieved_arr = [i for i in self.items if i['id'] == item_id ]
+            if len(item_retrieved_arr) > 0:
+                item_retrieved = item_retrieved_arr[0]
+            else:
+                item_retrieved = self.items
         else:
             item_retrieved = self.items
         return item_retrieved
