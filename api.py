@@ -34,7 +34,11 @@ class ItemManager():
 
     def retrieve(self, item_id: int) -> Item:
         if item_id is not None:
-            item_retrieved = [i for i in self.items if i['id'] == item_id ][0]
+            item_retrieved_arr = [i for i in self.items if i['id'] == item_id ]
+            if len(item_retrieved_arr) > 0:
+                item_retrieved = item_retrieved_arr[0]
+            else:
+                item_retrieved = self.items
         else:
             item_retrieved = self.items
         return item_retrieved
