@@ -6,6 +6,4 @@ class Item(BaseModel):
     name: str
     price: float
     is_offer: Optional[bool] = None
-
-class Item_with_id(Item):
-    id: int
+    id: Optional[int] = None

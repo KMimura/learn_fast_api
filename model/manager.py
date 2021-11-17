@@ -5,7 +5,7 @@ class ItemManager():
         self.items = []
 
     def add(self, item: model.Item):
-        if len(self.item) > 0:
+        if len(self.items) > 0:
             items_sorted_by_id = self.items.sort(
                 key=lambda x: x.id, reverse=True)
             biggest_id = items_sorted_by_id[len(items_sorted_by_id)-1]
