@@ -7,7 +7,8 @@ app = FastAPI()
 
 
 @app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str]=None):
+@app.get("/items")
+def read_item(item_id: Optional[int]=None, q: Optional[str]=None):
     return itemManager.retrieve(item_id)
 
 @app.put("/items/{item_id}")
