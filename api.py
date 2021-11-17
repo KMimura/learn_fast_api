@@ -7,8 +7,7 @@ app = FastAPI()
 
 
 @app.get("/items/{item_id}")
-@app.get("/items")
-def read_item(item_id: Optional[int]=None, q: Optional[str]=None):
+def read_item(item_id: int, q: Optional[str]=None):
     return itemManager.retrieve(item_id)
 
 @app.put("/items/{item_id}")
@@ -21,5 +20,5 @@ def create_item(item: model.Item):
     return {"status":"tmp"}
 
 @app.delete("/items/{item_id}")
-def delete_item(item_id: Optional[int]=None):
+def delete_item(item_id: int):
     return itemManager.delete(item_id)
