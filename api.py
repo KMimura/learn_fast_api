@@ -48,10 +48,6 @@ itemManager = ItemManager()
 app = FastAPI()
 
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Optional[str]=None):
     return itemManager.retrieve(item_id)
@@ -64,3 +60,7 @@ def update_item(item_id: int, item: Item):
 def create_item(item: Item):
     itemManager.add(item)
     return {"status":"tmp"}
+
+@app.delete("/items/{item_id}")
+def delete_item(item_id: int):
+    return itemManager.delete(item_id)
