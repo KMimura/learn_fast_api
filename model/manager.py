@@ -5,7 +5,7 @@ class ItemManager():
     def __init__(self):
         self.items = []
 
-    def add(self, items: List[model.Item]):
+    def create(self, items: List[model.Item]):
         
         if len(self.items) > 0:
             items_sorted_by_id = sorted(self.items,key=lambda x: x.id)
@@ -29,7 +29,7 @@ class ItemManager():
             self.items = self.items.pop(delete_position)
         # self.items = [i if i['id'] != item_id else item for i in self.items]
 
-    def retrieve(self, item_id: int) -> model.Item:
+    def read(self, item_id: int) -> model.Item:
         if item_id is not None:
             item_retrieved_arr = [i for i in self.items if i['id'] == item_id]
             if len(item_retrieved_arr) > 0:
