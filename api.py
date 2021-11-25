@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 from fastapi import FastAPI
 from model import model, manager
 
@@ -16,8 +16,8 @@ def update_item(item_id: int, item: model.Item):
     return {"item_name": item.name, "item_id": item_id}
 
 @app.post("/items")
-def create_item(item: model.Item):
-    itemManager.add(item)
+def create_item(items: List[model.Item]):
+    itemManager.add(items)
     return {"status":"tmp"}
 
 @app.delete("/items/{item_id}")
