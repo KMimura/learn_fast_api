@@ -13,6 +13,7 @@ def read_item(item_id: Optional[int]=None, q: Optional[str]=None):
 
 @app.put("/items/{item_id}")
 def update_item(item_id: int, item: model.Item):
+    itemManager.update(item_id, item)
     return {"item_name": item.name, "item_id": item_id}
 
 @app.post("/items")
