@@ -4,6 +4,7 @@ from fastapi import HTTPException
 
 class ItemManager():
     items: List[model.Item]
+
     def __init__(self):
         self.items = []
 
@@ -43,8 +44,7 @@ class ItemManager():
 
     def update(self, item_id: int, item: model.Item):
         item_to_update = [i for i in self.items if i.id == item_id]
-        if len(item_to_update) != 1:
+        if len(item_to_update) <= 0:
             raise HTTPException(status_code=404, detail="no items found")
         # delete and add
-        self.items = [i for i in self.items if i.id != item_id]
-        self.items.append(item)
+        self.items = [i if i.id != item_id else item for i in self.items]
