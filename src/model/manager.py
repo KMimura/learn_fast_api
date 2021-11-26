@@ -1,7 +1,9 @@
 from model import model
 from typing import List
+from fastapi import HTTPException
 
 class ItemManager():
+    items: List[model.Item]
     def __init__(self):
         self.items = []
 
@@ -27,7 +29,6 @@ class ItemManager():
                 break
         if delete_position is not None:
             self.items = self.items.pop(delete_position)
-        # self.items = [i if i['id'] != item_id else item for i in self.items]
 
     def read(self, item_id: int) -> model.Item:
         if item_id is not None:
@@ -39,3 +40,11 @@ class ItemManager():
         else:
             item_retrieved = self.items
         return item_retrieved
+
+    def update(self, item_id: int, item: model.Item):
+        item_to_update = [i for i in self.items if i.id == item_id]
+        if len(item_to_update) != 1:
+            raise HTTPException(status_code=404, detail="no items found")
+        # delete and add
+        self.items = [i for i in self.items if i.id != item_id]
+        self.items.append(item)
